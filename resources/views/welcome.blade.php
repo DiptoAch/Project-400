@@ -1,91 +1,30 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.frontend')
 
-    <title>{{ config('app.name') }}</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
+@section('content')
+    <section class="space-bottom-3">
+        <div class="bg-gray-200 space-2 space-lg-0 bg-img-hero" style="background-image: url({{ asset('assets/frontend/img/1920x588/img1.jpg') }});">
+            <div class="container">
+                <div class="js-slick-carousel u-slick" data-pagi-classes="text-center u-slick__pagination position-absolute right-0 left-0 mb-n8 mb-lg-4 bottom-0">
+                    <div class="js-slide">
+                        <div class="hero row min-height-588 align-items-center">
+                            <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
+                                <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
+                                    <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">The Bookworm Editors'</p>
+                                    <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
+                                        <span class="hero__title-line-1 font-weight-regular d-block">Featured Books of the</span>
+                                        <span class="hero__title-line-2 font-weight-bold d-block">February</span>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight" data-scs-animation-delay="500">
+                                <img class="img-fluid" src="{{ asset('assets/frontend/img/800x420/img1.png') }}" alt="image-description">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            <img src="{{ asset('img/logo.png') }}" alt="">
-            <br class="mb-0 pb-0">
-            Welcome to the {{ config("app.name") }}
-        </div>
-    </div>
-</div>
-</body>
-</html>
+    </section>
+    @include('partials.home.popular_books')
+    @include('partials.home.featured_books')
+@endsection
