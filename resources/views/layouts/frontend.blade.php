@@ -13,8 +13,11 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/slick-carousel/slick/slick.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <!-- Styles -->
     @stack('style')
+    <!-- Live Wire Style -->
+    <livewire:styles />
 </head>
 <body>
 
@@ -72,10 +75,7 @@
                                 <a href="{{ url('/') }}" class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('/') }}" class="nav-link">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('/') }}" class="nav-link">Books</a>
+                                <a href="{{ route('book-list') }}" class="nav-link">Books</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -84,7 +84,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @forelse($share_categories as $category)
-                                        <a href="" class="dropdown-item link-black-100">{{ $category->name }}</a>
+                                        <a href="{{ route('book-list', ['category' => $category->slug]) }}" class="dropdown-item link-black-100">{{ $category->name }}</a>
                                     @empty
                                     @endforelse
                                 </div>
@@ -98,12 +98,12 @@
         <div class="container-fluid pb-md-4">
             <div class="row justify-content-center px-0">
                 <div class="col-md-5 col-sm-12 text-center px-0">
-                    <form>
+                    <form method="get" action="{{ route('book-list') }}">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <i class="glph-icon flaticon-loupe input-group-text py-2d75 bg-white-100 border-white-100"></i>
                             </div>
-                            <input class="form-control bg-white-100 w-100 py-2d75 height-4 border-white-100" type="search" placeholder="Search Books" aria-label="Search">
+                            <input name="search" class="form-control bg-white-100 w-100 py-2d75 height-4 border-white-100" type="search" placeholder="Search Books" aria-label="Search">
                         </div>
                         <button class="btn btn-outline-success my-2 my-sm-0 sr-only" type="submit">Search</button>
                     </form>
@@ -153,7 +153,36 @@
 <script src="{{ asset('assets/frontend/js/components/hs.slick-carousel.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/components/hs.selectpicker.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/components/hs.show-animation.js') }}"></script>
+<!-- Live Wire Script -->
+<livewire:scripts />
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+    });
 
+    @if(session()->has('success'))
+    Toast.fire({
+        icon: 'success',
+        title:'{{ session()->get('success') }}'
+    });
+    @endif
+
+    window.addEventListener('alert',({detail:{type,message}})=>{
+        Toast.fire({
+            icon:type,
+            title:message
+        })
+    })
+</script>
 
 <script>
     $(document).on('ready', function () {

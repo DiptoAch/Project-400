@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 
 if (!function_exists('checkActiveUrl')) {
@@ -23,6 +24,17 @@ if (!function_exists('unlinkFile')) {
         $file = 'uploads/' . $path . '/' . $fileName;
         if(File::exists($file)) {
             File::delete($file);
+        }
+    }
+}
+
+if (!function_exists('diffForHumans')) {
+    function diffForHumans($date) {
+        $date = Carbon::parse($date, $format = 'F d, Y');
+        if (Carbon::now()->diff($date)->days > 0) {
+            return $date->format($format);
+        } else {
+            return $date->diffForHumans();
         }
     }
 }

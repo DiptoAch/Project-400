@@ -9,10 +9,9 @@
                         <div class="hero row min-height-588 align-items-center">
                             <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                                 <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
-                                    <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">The Bookworm Editors'</p>
+                                    <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2" data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">Stephen King'</p>
                                     <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp" data-scs-animation-delay="300">
-                                        <span class="hero__title-line-1 font-weight-regular d-block">Featured Books of the</span>
-                                        <span class="hero__title-line-2 font-weight-bold d-block">February</span>
+                                        <span class="hero__title-line-1 font-weight-regular d-block">Books are uniquely portable magic.</span>
                                     </h2>
                                 </div>
                             </div>
@@ -26,5 +25,5 @@
         </div>
     </section>
     @include('partials.home.popular_books')
-    @include('partials.home.featured_books')
+    @include('partials.home.books')
 @endsection

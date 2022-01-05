@@ -31,33 +31,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                <a href="{{ route('wishlist') }}" class="nav-link {{ checkActiveUrl('wishlist') }}">
+                    <i class="nav-icon fas fa-heart"></i>
                     <p>
-                        Example
-                        <i class="right fas fa-angle-left"></i>
+                        Wishlist
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Example v1</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Example v2</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Example v3</p>
-                        </a>
-                    </li>
-                </ul>
             </li>
 
         </ul>

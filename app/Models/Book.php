@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Book extends Model
 {
@@ -38,5 +39,41 @@ class Book extends Model
     public function getBookStatusAttribute()
     {
         return self::STATUS[$this->status];
+    }
+
+    public function getShortNameAttribute()
+    {
+        return Str::limit($this->name, 30, '...');
+    }
+
+    public function scopeActiveBooks($query)
+    {
+        $query->where('status', 1);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function getAuthUserReviewAttribute()
+    {
+        if (auth()->check()) {
+            return $this->reviews->where('user_id', auth()->id())->first();
+        }
+
+        return null;
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function scopeAuthUserWishlists($query)
+    {
+        return $this->withCount(['wishlists as wishlisted' => function ($q) {
+            $q->where('user_id', auth()->id());
+        }]);
     }
 }
